@@ -1,0 +1,57 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8 offset-md-2"> <!-- Centered content -->
+      <br>
+      <h4><%= listing.title %></h4>
+      
+      <!-- Responsive Image with Fallback -->
+      <img 
+        src="<%= listing.image ? listing.image : 'https://placehold.co/700x320/eeeeee/cccccc?text=No+Image' %>" 
+        class="card-img-top rounded" 
+        alt="<%= listing.title %>"
+        style="width: 100%; height: auto; object-fit: cover; max-height: 400px; border: 1px solid #ddd;"
+      >
+      <br><br>
+      
+      <p class="fs-4 fw-bold">PKR <%= listing.price.toLocaleString("en-pk") %></p>
+      <p><%= listing.description %></p>
+      <% if (listing.author) { %>
+        <p class="text-muted small">Sold by: <%= listing.author.username %></p>
+      <% } %>
+      <br>
+      
+      <% if (currentUser) { %>
+        <!-- Button logic -->
+        <div class="d-flex gap-2">
+          
+          <% if (listing.author && listing.author._id.equals(currentUser._id)) { %>
+            <!-- Author's view: Show Edit/Delete -->
+            <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark">Edit</a>
+            <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" style="display:inline;">
+              <button class="btn btn-danger">Delete</button>
+            </form>
+          <% } else { %>
+            <!-- Customer's view: Show Cart buttons -->
+            <% if (inCart) { %>
+              <a href="/cart" class="btn btn-secondary">
+                <i class="fa-solid fa-check"></i> In Cart (Go to Cart)
+              </a>
+            <% } else { %>
+              <form action="/cart/add/<%= listing._id %>" method="POST">
+                <button type="submit" class="btn btn-dark">
+                  <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                </button>
+              </form>
+            <% } %>
+          <% } %>
+          
+        </div>
+      <% } else { %>
+        <!-- Logged out view -->
+        <p class="fs-5">Please <a href="/login">log in</a> to purchase this item.</p>
+      <% } %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+# Dependency directory
+node_modules/
+
+# Environment Variables (CRITICAL for SECURITY)
+.env
+
+# Logs and temporary files
+npm-debug.log*
+yarn-debug.log*
+*.log
+.npm/
+
+# Operating System Files (Windows)
+Thumbs.db

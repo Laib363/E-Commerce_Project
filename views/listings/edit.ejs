@@ -1,0 +1,34 @@
+<%- layout('layouts/boilerplate') -%>
+
+<div class="card shadow-sm p-3">
+    <h2 class="mb-3">Edit Your Product Details:</h2>
+    <form method="POST" action="/listings/<%=listing._id %>?_method=PUT" >
+    
+    <div class="mb-3">
+   <label for="title" class="form-label">Product Title</label>
+    <input  id="title" name="listing[title]"   value="<%= listing.title %>"type="text" class="form-control">
+    </div>
+    <br> <br>
+       
+       <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea  id="description" name= "listing[description]"class="form-control" > <%= listing.description %> </textarea>
+       </div>
+        <br> <br>
+        
+        <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input id="price" name="listing[price]" value="<%=listing.price %>" type="number" class="form-control">
+        </div>
+        <br> <br>
+        <div class="mb-3">
+        <label for="image" class="form-label">Image URL</label>
+        <input id="image" name="listing[image]"  value="<%=listing.image %>" type="text">
+        </div>
+        <br> <br>
+      <button  type="submit" class="btn btn-dark btn-sm">Edit</button>
+             </form>
+</div>
+    
+    
+
