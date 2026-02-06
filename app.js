@@ -1,5 +1,14 @@
 // app.js
 
+module.exports.show = async (req, res) => {
+  const listing = await Listing
+    .findById(req.params.id)
+    .populate("author");
+
+  res.render("listings/show", { listing });
+};
+
+
 //  ENVIRONMENT VARIABLES: Load .env file first
 // This MUST be the first line to ensure environment variables are available immediately.
 require('dotenv').config(); // MUST install: npm install dotenv

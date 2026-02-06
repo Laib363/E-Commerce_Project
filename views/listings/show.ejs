@@ -27,7 +27,12 @@
                 </p>
                 
                 <p class="text-muted small mb-4">
-                    Sold by: <%= listing.author.username %>
+                    <% if (listing.author) { %>
+  Sold by: <%= listing.author.username %>
+<% } else { %>
+  Sold by: Unknown
+<% } %>
+
                 </p>
 
                 <% if (currentUser && listing.author.equals(currentUser._id)) { %>
